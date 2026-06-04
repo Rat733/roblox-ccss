@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Mini App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -35,14 +35,18 @@
             align-items: center;
             gap: 12px;
         }
+        
+        /* Стилизация аватарки строго под круглое золотое лого из ТГ */
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #007bff;
-            background-color: #eee;
+            border: 2px solid #ffcc00; /* Золотистая рамка под стиль логотипа */
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
+        
         .username {
             font-weight: bold;
             font-size: 18px;
@@ -80,7 +84,6 @@
             box-sizing: border-box;
         }
 
-        /* Картинка товара (исправлено и добавлены размеры) */
         .item-image {
             width: 100%;
             max-width: 200px;
@@ -149,7 +152,8 @@
 
     <div class="header">
         <div class="profile-section">
-            <img class="avatar" id="user-avatar" src="https://img.icons8.com/illustrations/iron/100/user-male-circle.png" alt="avatar">
+            <!-- По умолчанию установлена картинка из вашего запроса -->
+            <img class="avatar" id="user-avatar" src="https://www.anti-malware.ru/files/styles/imagesize400w/public/images/source/robloxonrutube-news.png?itok=n__SYUF6%22%20alt=%22Product%20Image%22" alt="avatar">
             <div class="username" id="user-name">Loading...</div>
         </div>
         <button class="reload-btn" onclick="window.location.reload();">🔄</button>
@@ -157,9 +161,8 @@
 
     <div class="main-content">
         <div class="card">
-            <!-- СПОСОБ 1: Просто замените ссылку в src="вставьте_сюда_ссылку" -->
-            <img class="item-image" id="product-image" src="https://www.anti-malware.ru/files/styles/imagesize400w/public/images/source/robloxonrutube-news.png?itok=n__SYUF6" alt="Product Image">
-            <a href="https://tpi.li/7Kk56so" target="_blank" class="inspect-btn">ОСМОТРЕТЬ</a>
+            <img class="item-image" id="product-image" src="https://icons8.com" alt="Product Image">
+            <a href="https://tpi.li" target="_blank" class="inspect-btn">ОСМОТРЕТЬ</a>
         </div>
     </div>
 
@@ -172,7 +175,7 @@
             <span class="nav-icon">➕</span>
             <span>Новые предложения</span>
         </a>
-        <a href="https://t.me/Syfle67" target="_blank" class="nav-item">
+        <a href="https://t.me" target="_blank" class="nav-item">
             <span class="nav-icon">🛠️</span>
             <span>Служба поддержки</span>
         </a>
@@ -188,16 +191,16 @@
 
         if (user) {
             document.getElementById('user-name').innerText = user.username ? 'Smart ' + user.username : user.first_name;
+            
+            // Если у пользователя есть фото в ТГ, загружаем его через CORS-прокси bypass
             if (user.photo_url) {
-                document.getElementById('user-avatar').src = user.photo_url;
+                const proxyUrl = 'https://weserv.nl' + encodeURIComponent(user.photo_url);
+                document.getElementById('user-avatar').src = proxyUrl;
             }
         } else {
+            // Если открыто в обычном браузере, оставляем логотип из фото
             document.getElementById('user-name').innerText = "ROBLOX CHEATS";
         }
-
-        // СПОСОБ 2: Вы можете менять картинку динамически через JavaScript
-        // Раскомментируйте строку ниже и вставьте свою ссылку, если нужно менять её кодом:
-        // document.getElementById('product-image').src = "https://your-site.com";
     </script>
 </body>
 </html>
