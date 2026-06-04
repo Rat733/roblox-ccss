@@ -10,8 +10,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            /* Задний фон: паттерн со значками Roblox */
-            background-image{
             background-color: #f3f4f6;
             background-size: cover;
             background-attachment: fixed;
@@ -20,7 +18,7 @@
             min-height: 100vh;
         }
 
-        /* Верхняя панель (Профиль, Ник, Перезагрузка) */
+        /* Верхняя панель */
         .header {
             display: flex;
             align-items: center;
@@ -58,17 +56,17 @@
             color: #666;
         }
 
-        /* Центрирование карточки товара на экране */
+        /* Центрирование карточки */
         .main-content {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 16px;
-            margin-bottom: 70px; /* Отступ под нижнее меню */
+            margin-bottom: 70px;
         }
 
-        /* Карточка товара строго по макету */
+        /* Карточка товара */
         .card {
             background: #ffffff;
             border-radius: 24px;
@@ -82,8 +80,10 @@
             box-sizing: border-box;
         }
 
-        /* Картинка Nanobanano 2 по центру */
-        .item-image{
+        /* Картинка товара (исправлено и добавлены размеры) */
+        .item-image {
+            width: 100%;
+            max-width: 200px;
             aspect-ratio: 1 / 1;
             object-fit: cover;
             border-radius: 16px;
@@ -91,7 +91,7 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
         }
 
-        /* Большая синяя кнопка "ОСМОТРЕТЬ" */
+        /* Большая синяя кнопка */
         .inspect-btn {
             width: 100%;
             background-color: #007bff;
@@ -111,7 +111,7 @@
             background-color: #0056b3;
         }
 
-        /* Нижнее меню из 3 элементов */
+        /* Нижнее меню */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -157,7 +157,8 @@
 
     <div class="main-content">
         <div class="card">
-            <img class="item-image" src="https://img.icons8.com/plasticine/200/banana.png" alt="Nanobanano 2">
+            <!-- СПОСОБ 1: Просто замените ссылку в src="вставьте_сюда_ссылку" -->
+            <img class="item-image" id="product-image" src="https://img.icons8.com/plasticine/200/banana.png" alt="Product Image">
             <a href="https://tpi.li/7Kk56so" target="_blank" class="inspect-btn">ОСМОТРЕТЬ</a>
         </div>
     </div>
@@ -180,22 +181,23 @@
     <script>
         // Инициализируем Telegram Web App
         const tg = window.Telegram.WebApp;
-        tg.expand(); // Открываем шторку на максимум
+        tg.expand(); 
 
         // Получаем данные пользователя
         const user = tg.initDataUnsafe?.user;
 
         if (user) {
-            // Ставим имя или никнейм
             document.getElementById('user-name').innerText = user.username ? 'Smart ' + user.username : user.first_name;
-            // Пытаемся загрузить реальное фото из ТГ
             if (user.photo_url) {
                 document.getElementById('user-avatar').src = user.photo_url;
             }
         } else {
-            // Локальный тест в обычном браузере
             document.getElementById('user-name').innerText = "ROBLOX CHEATS";
         }
+
+        // СПОСОБ 2: Вы можете менять картинку динамически через JavaScript
+        // Раскомментируйте строку ниже и вставьте свою ссылку, если нужно менять её кодом:
+        // document.getElementById('product-image').src = "https://your-site.com";
     </script>
 </body>
 </html>
